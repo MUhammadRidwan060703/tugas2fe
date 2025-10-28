@@ -1,0 +1,68 @@
+body {
+    text-align: center;
+  }
+  
+  #colorPicker {
+    margin-top: 100px;
+  }
+  
+  label {
+    color: white;
+    display: inline-block;
+    width: 30px;
+  }
+  
+  input[type="range"] {
+   width:100px;
+  }
+ 
+  ::placeholder{
+    font-size: 15px;
+  }
+
+  #productResult{
+    padding-top: 50px;
+    display: flex;
+    
+  }
+ 
+  .button #searchButton {
+    position: relative;
+    top: 15px;
+    right: 100px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    
+  }
+ 
+  .button #searchButton i {
+    color: #000;
+  }
+  
+
+  #searchInput {
+    width: 850px;
+    height: 50px;
+    margin-right: 50px;
+    margin-top: 50px
+  }
+
+  .product-card img {
+    width: 50%; /* Atur lebar gambar 100% dari lebar container */
+    height: auto; /* Atur tinggi gambar secara proporsional */
+  }
+  
+
+  .product-card {
+    width: 400px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+
+
+
+ 

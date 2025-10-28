@@ -1,0 +1,24 @@
+Team Parallax
+
+1. NIM : 221112668
+    Nama : Muhammad Ridwan
+1. NIM : 221112345
+    Nama : Faqih Fiddin
+1. NIM : 221112911
+    Nama : Rio Dominikus Dakhi
+1. NIM : 221113430
+    Nama : Maulana Fattah
+1. NIM : 221111522
+    Nama : Dzaki Riadi
+
+Teknologi yang digunakan ialah :
+- HTML
+- JAVASCRIPT
+- CSS
+- BOOSTRAP (FrameWork)
+
+Pada project ini kami menggunakan beberapa fungsi :
+1. Fungsi slide
+2. Fungsi Fungsi Pencarian barang
+3. Fungsi mengganti warna Background
+4. Fungsi Alert

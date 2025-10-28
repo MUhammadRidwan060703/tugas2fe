@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <!-- ... -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    
+    <title>Marketplace Website</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* CSS untuk styling navbar */
+        .navbar {
+            list-style-type: none;
+            margin: 10px 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: white;
+            float: right; /* Navbar ke kanan */
+        }
+
+        .navbar-item {
+            display: inline-block;
+        }
+
+        .navbar-item a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 16px 18px;
+            font-size: larger;
+            text-decoration: none;
+            
+        }
+
+        .navbar-item a:hover {
+            background-color: darkgrey;
+        }
+
+        .logo {
+            padding: 0;
+            width: 140px;
+            position: relative;
+            padding-top: 0px;
+            margin-top: 10px;
+        }
+
+        .banner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: -70px;
+            
+        }
+
+        .banner {
+            max-width: 100%;
+            max-height: 100%;
+            
+        }
+
+        .content {
+            margin-top: 20px;
+    
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            width: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product h3 {
+            margin-top: 0;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        .slick-prev{
+            width: 100px;
+
+        }
+    </style>
+    <img src="./Logo 1.png" alt="Logo" class="logo">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <ul class="navbar">
+        
+        <li class="navbar-item"><a href="index.html">Home</a></li>
+        <li class="navbar-item"><a href="Produk.html">Product</a></li>
+        <li class="navbar-item"><a href="contact.html">Contact</a></li>
+        <li class="navbar-item"><a href="About.html">About</a></li>
+    </ul>
+
+    <!-- Logo -->
+    
+
+   
+    <!-- Slide Banner -->
+    <div class="banner-container">
+        <img src="./Banner1.png" alt="Banner" class="banner">
+    </div>
+
+    <div class="container">
+        <h1 class="text-center">Our Products</h1>
+        <div class="row product-container">
+            <div class="col-md-3">
+                <div class="product">
+                    <img src="iphone.png" alt="Product 1">
+                    <h3>Gadget</h3>
+                    <p>IPhone 15</p>
+                    <p>Price: Rp.15.000.000</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product">
+                    <img src="jacket.png" alt="Product 2">
+                    <h3>Jacket</h3>
+                    <p>Jacket</p>
+                    <p>Price: Rp.300.000</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product">
+                    <img src="bola.png" alt="Product 3">
+                    <h3>BOLA</h3>
+                    <p>Bola Basket</p>
+                    <p>Price: Rp.200.000</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product">
+                    <img src="motor.png" alt="Product 4">
+                    <h3>Motor</h3>
+                    <p>Motor CBR</p>
+                    <p>Price: Rp.25.000.000</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product">
+                    <img src="meja.png" alt="Product 4">
+                    <h3>Purniture</h3>
+                    <p>Meja</p>
+                    <p>Price: Rp.350.000</p>
+                </div>
+            </div>
+           
+            <!-- Add more product items here -->
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.product-container').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                prevArrow: '',
+                nextArrow: '',
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
