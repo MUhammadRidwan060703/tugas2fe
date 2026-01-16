@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tugas2fe-service
+  namespace: default
+  labels:
+    app: tugas2fe
+spec:
+  type: LoadBalancer
+  selector:
+    app: tugas2fe
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800

@@ -1,0 +1,22 @@
+name: CI/CD for tugas2fe
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t mridwan/tugas2fe:latest .
+
+      - name: Push Docker image
+        run: docker push mridwan/tugas2fe:latest

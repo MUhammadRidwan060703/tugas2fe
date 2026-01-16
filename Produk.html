@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Marketplace Website</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* CSS untuk styling navbar */
+        .navbar {
+            list-style-type: none;
+            margin: 10px 0;
+            padding: 0;
+            overflow: hidden;
+            float: right; /* Navbar ke kanan */
+        }
+
+        .navbar-item {
+            display: inline-block;
+        }
+
+        .navbar-item a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 16px 18px;
+            font-size: larger;
+            text-decoration: none;
+            
+        }
+
+        .navbar-item a:hover {
+            background-color: darkgrey;
+        }
+
+        .logo {
+            padding: 0;
+            width: 140px;
+            position: relative;
+            padding-top: 0px;
+            margin-top: 10px;
+            float: left;
+        }
+
+        
+
+        .content {
+            margin-top: 20px;
+    
+        }
+
+      
+    </style>
+    <img src="./Logo 1.png" alt="Logo" class="logo">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <ul class="navbar">
+        
+        <li class="navbar-item"><a href="index.html">Home</a></li>
+        <li class="navbar-item"><a href="Produk.html">Product</a></li>
+        <li class="navbar-item"><a href="contact.html">Contact</a></li>
+        <li class="navbar-item"><a href="About.html">About</a></li>
+    </ul>
+
+    <!-- Logo -->
+    
+    <div class="button">
+        <div class="input-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Cari produk berdasarkan kategori">
+            <button class="btn btn-primary" id="searchButton">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div id="productResult"></div>
+    
+    <div id="colorPicker" class="mt-3">
+        <p>Sesuaikan Warna Background</p>
+        <div class="form-group">
+            <label for="red">Red:</label>
+            <input type="range" class="form-control-range" id="red" min="0" max="255" value="0">
+        </div>
+        <div class="form-group">
+            <label for="green">Green:</label>
+            <input type="range" class="form-control-range" id="green" min="0" max="255" value="0">
+        </div>
+        <div class="form-group">
+            <label for="blue">Blue:</label>
+            <input type="range" class="form-control-range" id="blue" min="0" max="255" value="0">
+        </div>
+    
+        <script src="script.js"></script>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+

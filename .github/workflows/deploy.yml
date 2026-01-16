@@ -1,0 +1,122 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+env:
+  DOCKER_IMAGE: muhammadridwan060703/tugas2fe
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./dockerfile
+        push: true
+        tags: |
+          ${{ env.DOCKER_IMAGE }}:latest
+          ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Image digest
+      run: echo "✅ Image pushed successfully!"
+
+  deploy:
+    name: Deploy to Kubernetes
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Configure kubectl
+      run: |
+        mkdir -p $HOME/.kube
+        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+        chmod 600 $HOME/.kube/config
+
+    - name: Verify Kubernetes connection
+      run: |
+        kubectl cluster-info
+        kubectl get nodes
+
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f k8s-deployment.yaml
+
+    - name: Update deployment image
+      run: |
+        kubectl set image deployment/tugas2fe-deployment \
+          tugas2fe=${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
+          -n default
+
+    - name: Wait for rollout to complete
+      run: |
+        kubectl rollout status deployment/tugas2fe-deployment -n default --timeout=5m
+
+    - name: Get deployment status
+      run: |
+        echo "======================================"
+        echo "📦 Deployment Status"
+        echo "======================================"
+        kubectl get deployment tugas2fe-deployment -n default
+        echo ""
+        echo "======================================"
+        echo "🚀 Pods Status"
+        echo "======================================"
+        kubectl get pods -n default -l app=tugas2fe
+        echo ""
+        echo "======================================"
+        echo "🌐 Service Info"
+        echo "======================================"
+        kubectl get svc tugas2fe-service -n default
+        echo ""
+        echo "======================================"
+        echo "🔗 LoadBalancer IP/URL"
+        echo "======================================"
+        kubectl get svc tugas2fe-service -n default -o jsonpath='{.status.loadBalancer.ingress[0].ip}{.status.loadBalancer.ingress[0].hostname}{"\n"}'
+
+    - name: Create deployment summary
+      if: success()
+      run: |
+        echo "### ✅ Deployment Successful! 🎉" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Image:** \`${{ env.DOCKER_IMAGE }}:${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Deployment Details:**" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        kubectl get deployment tugas2fe-deployment -n default >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Pods:**" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        kubectl get pods -n default -l app=tugas2fe >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
